@@ -11,10 +11,14 @@ Single page web application with a minimal infobar at top 10% of the page and th
 
 ## TODOs:
 
-- try and build DWX on my own to understand how that works
+- Deobfuscate main.js and figure out how it works
+
 - get the front end running on my computer
+    - this seems to be fine
 - cut the js code down until it stops working
 - add enough back so it functions again
 - repeat with the C code????
+- try and build DWX on my own to understand how that works
+    - might not be necessary until later
 - figure out how to get DOS to immediately boot into TUTOR86
 - figure out how to get the page to run from github pages
