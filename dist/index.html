@@ -28,6 +28,23 @@
     <script src="FileSaver.min.js"></script> 
     <script src="zip.min.js"></script>
     <script src="nipplejs.min.js"></script> -->
+
+
+    <!--Initial dependencies:
+        -Script
+            - jquery 3.3.1
+            - rivites.bundled
+            - popper.js
+            - bootstrap.js
+            - toastr.js
+            - FileSaver.js
+            - zip.js
+            - nipplejs
+        -CSS
+            - font-awesome 4.7.0
+            - bootstrap
+            - toastr
+    -->
 </head>
 <style>
     .githubDiv a {
@@ -658,7 +675,8 @@
         var rando = Math.floor(Math.random() * Math.floor(100000));
         var script = document.createElement('script');
         script.src = 'romlist.js?v=' + rando;
-        document.getElementsByTagName('head')[0].appendChild(script);
+        console.log(rando, script.src, script)
+        document.getElementsByTagName('head')[0].appendChild(script); 
         script.onload = () => {
             var script2 = document.createElement('script');
             script2.src = 'settings.js?v=' + rando;

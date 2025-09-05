@@ -818,6 +818,7 @@ class MyClass {
 
         if (this.iso_loaded == false)
         {
+            console.log('no iso loaded')
             if (!this.noIso)
             {
                 if (this.rom_name.toLocaleLowerCase().endsWith('.img'))

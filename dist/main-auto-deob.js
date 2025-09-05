@@ -9,13 +9,16 @@ var ENVIRONMENT_IS_WEB = typeof window == "object";
 var ENVIRONMENT_IS_WORKER = typeof importScripts == "function";
 var ENVIRONMENT_IS_NODE = typeof process == "object" && typeof process.versions == "object" && typeof process.versions.node == "string";
 var scriptDirectory = "";
+
 function locateFile(path) {
     if (Module["locateFile"]) {
         return Module["locateFile"](path, scriptDirectory)
     }
     return scriptDirectory + path
 }
+
 var read_, readAsync, readBinary;
+
 if (ENVIRONMENT_IS_NODE) {
     var fs = require("fs");
     var nodePath = require("path");
@@ -194,20 +197,25 @@ function getUniqueRunDependency(id) {
         ___trap()
     } var e = new WebAssembly.RuntimeError(what);
     throw e
-} var dataURIPrefix = "data:application/octet-stream;base64,";
+} 
+var dataURIPrefix = "data:application/octet-stream;base64,";
 var isDataURI = filename => filename.startsWith(dataURIPrefix);
 var isFileURI = filename => filename.startsWith("file://");
+
+// connect the DOS wasm binary in main.wasm to this file
 var wasmBinaryFile;
 wasmBinaryFile = "main.wasm";
 if (!isDataURI(wasmBinaryFile)) {
     wasmBinaryFile = locateFile(wasmBinaryFile)
-} function getBinarySync(file) {
+} 
+function getBinarySync(file) {
     if (file == wasmBinaryFile && wasmBinary) {
         return new Uint8Array(wasmBinary)
     } if (readBinary) {
         return readBinary(file)
     } throw "both async and sync fetching of the wasm failed"
-} function getBinaryPromise(binaryFile) {
+} 
+function getBinaryPromise(binaryFile) {
     if (!wasmBinary && (ENVIRONMENT_IS_WEB || ENVIRONMENT_IS_WORKER)) {
         if (typeof fetch == "function" && !isFileURI(binaryFile)) {
             return fetch(binaryFile, {
@@ -6142,7 +6150,8 @@ function _fd_read(fd, iov, iovcnt, pnum) {
         if (typeof FS == "undefined" || !(e.name === "ErrnoError")) throw e;
         return e.errno
     }
-} function _fd_seek(fd, offset_low, offset_high, whence, newOffset) {
+} 
+function _fd_seek(fd, offset_low, offset_high, whence, newOffset) {
     var offset = convertI32PairToI53Checked(offset_low, offset_high);
     try {
         if (isNaN(offset)) return 61;
@@ -6155,7 +6164,8 @@ function _fd_read(fd, iov, iovcnt, pnum) {
         if (typeof FS == "undefined" || !(e.name === "ErrnoError")) throw e;
         return e.errno
     }
-} var _fd_sync = function (fd) {
+} 
+var _fd_sync = function (fd) {
     try {
         var stream = SYSCALLS.getStreamFromFD(fd);
         return Asyncify.handleSleep(wakeUp => {
@@ -6202,7 +6212,8 @@ function _fd_write(fd, iov, iovcnt, pnum) {
         if (typeof FS == "undefined" || !(e.name === "ErrnoError")) throw e;
         return e.errno
     }
-} var arraySum = (array, index) => {
+} 
+var arraySum = (array, index) => {
     var sum = 0;
     for (var i = 0;
         i <= index;
@@ -6654,7 +6665,7 @@ for (var i = 0; i < 288; ++i) {
     miniTempWebGLFloatBuffers[i] = miniTempWebGLFloatBuffersStorage.subarray(0, i + 1)
 }
 var miniTempWebGLIntBuffersStorage = new Int32Array(288);
-for (var i = 0; i < 288; ++i) {
+for (var i = 0; i < 288; ++i) { 
     miniTempWebGLIntBuffers[i] = miniTempWebGLIntBuffersStorage.subarray(0, i + 1)
 } var wasmImports = {
     a: ___assert_fail, tb: ___syscall_chdir, sb: ___syscall_chmod, ub: ___syscall_faccessat, f: ___syscall_fcntl64, pb: ___syscall_fstat64, _a: ___syscall_ftruncate64, kb: ___syscall_getcwd, hb: ___syscall_getdents64, S: ___syscall_ioctl, nb: ___syscall_lstat64, jb: ___syscall_mkdirat, mb: ___syscall_newfstatat, Q: ___syscall_openat, gb: ___syscall_readlinkat, fb: ___syscall_renameat, O: ___syscall_rmdir, ob: ___syscall_stat64, eb: ___syscall_statfs64, P: ___syscall_unlinkat, cb: ___syscall_utimensat, qb: __emscripten_get_now_is_monotonic, Wa: __gmtime_js, Xa: __localtime_js, Ya: __mktime_js, db: __tzset_js, b: _abort, Na: _eglBindAPI, rb: _eglChooseConfig, $a: _eglCreateContext, Ua: _eglCreateWindowSurface, Va: _eglDestroyContext, Ta: _eglDestroySurface, ib: _eglGetConfigAttrib, T: _eglGetDisplay, La: _eglGetError, Hb: _eglInitialize, Sa: _eglMakeCurrent, Ma: _eglQueryString, Ra: _eglSwapBuffers, Qa: _eglSwapInterval, wb: _eglTerminate, Oa: _eglWaitGL, Pa: _eglWaitNative, d: _emscripten_asm_const_int, e: _emscripten_asm_const_int_sync_on_main_thread, q: _emscripten_date_now, Ea: _emscripten_exit_fullscreen, Ja: _emscripten_exit_pointerlock, k: _emscripten_get_device_pixel_ratio, g: _emscripten_get_element_css_size, U: _emscripten_get_gamepad_status, p: _emscripten_get_now, Oc: _emscripten_get_num_gamepads, Ka: _emscripten_get_screen_size, ia: _emscripten_glActiveTexture, ha: _emscripten_glAttachShader, za: _emscripten_glBeginQueryEXT, ga: _emscripten_glBindAttribLocation, ea: _emscripten_glBindBuffer, da: _emscripten_glBindFramebuffer, ca: _emscripten_glBindRenderbuffer, ba: _emscripten_glBindTexture, ra: _emscripten_glBindVertexArrayOES, aa: _emscripten_glBlendColor, $: _emscripten_glBlendEquation, _: _emscripten_glBlendEquationSeparate, Z: _emscripten_glBlendFunc, Y: _emscripten_glBlendFuncSeparate, X: _emscripten_glBufferData, Vd: _emscripten_glBufferSubData, Ud: _emscripten_glCheckFramebufferStatus, Td: _emscripten_glClear, Sd: _emscripten_glClearColor, Rd: _emscripten_glClearDepthf, Qd: _emscripten_glClearStencil, Pd: _emscripten_glColorMask, Od: _emscripten_glCompileShader, Nd: _emscripten_glCompressedTexImage2D, Md: _emscripten_glCompressedTexSubImage2D, Kd: _emscripten_glCopyTexImage2D, Jd: _emscripten_glCopyTexSubImage2D, Id: _emscripten_glCreateProgram, Hd: _emscripten_glCreateShader, Gd: _emscripten_glCullFace, Fd: _emscripten_glDeleteBuffers, Ed: _emscripten_glDeleteFramebuffers, Dd: _emscripten_glDeleteProgram, Ca: _emscripten_glDeleteQueriesEXT, Cd: _emscripten_glDeleteRenderbuffers, Bd: _emscripten_glDeleteShader, Ad: _emscripten_glDeleteTextures, pa: _emscripten_glDeleteVertexArraysOES, zd: _emscripten_glDepthFunc, yd: _emscripten_glDepthMask, xd: _emscripten_glDepthRangef, wd: _emscripten_glDetachShader, vd: _emscripten_glDisable, ud: _emscripten_glDisableVertexAttribArray, td: _emscripten_glDrawArrays, la: _emscripten_glDrawArraysInstancedANGLE, ma: _emscripten_glDrawBuffersWEBGL, sd: _emscripten_glDrawElements, ka: _emscripten_glDrawElementsInstancedANGLE, rd: _emscripten_glEnable, qd: _emscripten_glEnableVertexAttribArray, ya: _emscripten_glEndQueryEXT, pd: _emscripten_glFinish, od: _emscripten_glFlush, nd: _emscripten_glFramebufferRenderbuffer, md: _emscripten_glFramebufferTexture2D, ld: _emscripten_glFrontFace, kd: _emscripten_glGenBuffers, id: _emscripten_glGenFramebuffers, Da: _emscripten_glGenQueriesEXT, hd: _emscripten_glGenRenderbuffers, gd: _emscripten_glGenTextures, oa: _emscripten_glGenVertexArraysOES, jd: _emscripten_glGenerateMipmap, fd: _emscripten_glGetActiveAttrib, ed: _emscripten_glGetActiveUniform, dd: _emscripten_glGetAttachedShaders, cd: _emscripten_glGetAttribLocation, bd: _emscripten_glGetBooleanv, ad: _emscripten_glGetBufferParameteriv, $c: _emscripten_glGetError, _c: _emscripten_glGetFloatv, Zc: _emscripten_glGetFramebufferAttachmentParameteriv, Yc: _emscripten_glGetIntegerv, Wc: _emscripten_glGetProgramInfoLog, Xc: _emscripten_glGetProgramiv, ta: _emscripten_glGetQueryObjecti64vEXT, va: _emscripten_glGetQueryObjectivEXT, sa: _emscripten_glGetQueryObjectui64vEXT, ua: _emscripten_glGetQueryObjectuivEXT, wa: _emscripten_glGetQueryivEXT, Vc: _emscripten_glGetRenderbufferParameteriv, Tc: _emscripten_glGetShaderInfoLog, Sc: _emscripten_glGetShaderPrecisionFormat, Rc: _emscripten_glGetShaderSource, Uc: _emscripten_glGetShaderiv, Qc: _emscripten_glGetString, Pc: _emscripten_glGetTexParameterfv, Nc: _emscripten_glGetTexParameteriv, Kc: _emscripten_glGetUniformLocation, Mc: _emscripten_glGetUniformfv, Lc: _emscripten_glGetUniformiv, Hc: _emscripten_glGetVertexAttribPointerv, Jc: _emscripten_glGetVertexAttribfv, Ic: _emscripten_glGetVertexAttribiv, Gc: _emscripten_glHint, Fc: _emscripten_glIsBuffer, Ec: _emscripten_glIsEnabled, Dc: _emscripten_glIsFramebuffer, Cc: _emscripten_glIsProgram, Aa: _emscripten_glIsQueryEXT, Bc: _emscripten_glIsRenderbuffer, Ac: _emscripten_glIsShader, zc: _emscripten_glIsTexture, na: _emscripten_glIsVertexArrayOES, yc: _emscripten_glLineWidth, xc: _emscripten_glLinkProgram, wc: _emscripten_glPixelStorei, vc: _emscripten_glPolygonOffset, xa: _emscripten_glQueryCounterEXT, uc: _emscripten_glReadPixels, tc: _emscripten_glReleaseShaderCompiler, sc: _emscripten_glRenderbufferStorage, rc: _emscripten_glSampleCoverage, qc: _emscripten_glScissor, pc: _emscripten_glShaderBinary, oc: _emscripten_glShaderSource, nc: _emscripten_glStencilFunc, mc: _emscripten_glStencilFuncSeparate, lc: _emscripten_glStencilMask, kc: _emscripten_glStencilMaskSeparate, jc: _emscripten_glStencilOp, ic: _emscripten_glStencilOpSeparate, hc: _emscripten_glTexImage2D, gc: _emscripten_glTexParameterf, fc: _emscripten_glTexParameterfv, ec: _emscripten_glTexParameteri, dc: _emscripten_glTexParameteriv, cc: _emscripten_glTexSubImage2D, bc: _emscripten_glUniform1f, ac: _emscripten_glUniform1fv, $b: _emscripten_glUniform1i, _b: _emscripten_glUniform1iv, Zb: _emscripten_glUniform2f, Yb: _emscripten_glUniform2fv, Xb: _emscripten_glUniform2i, Wb: _emscripten_glUniform2iv, Vb: _emscripten_glUniform3f, Ub: _emscripten_glUniform3fv, Tb: _emscripten_glUniform3i, Sb: _emscripten_glUniform3iv, Rb: _emscripten_glUniform4f, Qb: _emscripten_glUniform4fv, Pb: _emscripten_glUniform4i, Ob: _emscripten_glUniform4iv, Nb: _emscripten_glUniformMatrix2fv, Mb: _emscripten_glUniformMatrix3fv, Lb: _emscripten_glUniformMatrix4fv, Kb: _emscripten_glUseProgram, Jb: _emscripten_glValidateProgram, Ib: _emscripten_glVertexAttrib1f, Gb: _emscripten_glVertexAttrib1fv, Fb: _emscripten_glVertexAttrib2f, Eb: _emscripten_glVertexAttrib2fv, Db: _emscripten_glVertexAttrib3f, Cb: _emscripten_glVertexAttrib3fv, Bb: _emscripten_glVertexAttrib4f, Ab: _emscripten_glVertexAttrib4fv, ja: _emscripten_glVertexAttribDivisorANGLE, zb: _emscripten_glVertexAttribPointer, yb: _emscripten_glViewport, s: _emscripten_has_asyncify, Fa: _emscripten_request_fullscreen_strategy, N: _emscripten_request_pointerlock, bb: _emscripten_resize_heap, V: _emscripten_sample_gamepad_data, t: _emscripten_set_beforeunload_callback_on_thread, F: _emscripten_set_blur_callback_on_thread, j: _emscripten_set_canvas_element_size, o: _emscripten_set_element_css_size, G: _emscripten_set_focus_callback_on_thread, w: _emscripten_set_fullscreenchange_callback_on_thread, n: _emscripten_set_gamepadconnected_callback_on_thread, m: _emscripten_set_gamepaddisconnected_callback_on_thread, z: _emscripten_set_keydown_callback_on_thread, x: _emscripten_set_keypress_callback_on_thread, y: _emscripten_set_keyup_callback_on_thread, L: _emscripten_set_mousedown_callback_on_thread, J: _emscripten_set_mouseenter_callback_on_thread, I: _emscripten_set_mouseleave_callback_on_thread, M: _emscripten_set_mousemove_callback_on_thread, K: _emscripten_set_mouseup_callback_on_thread, A: _emscripten_set_pointerlockchange_callback_on_thread, v: _emscripten_set_resize_callback_on_thread, B: _emscripten_set_touchcancel_callback_on_thread, D: _emscripten_set_touchend_callback_on_thread, C: _emscripten_set_touchmove_callback_on_thread, E: _emscripten_set_touchstart_callback_on_thread, u: _emscripten_set_visibilitychange_callback_on_thread, H: _emscripten_set_wheel_callback_on_thread, Ga: _emscripten_set_window_title, h: _emscripten_sleep, vb: _environ_get, xb: _environ_sizes_get, c: _exit, l: _fd_close, R: _fd_read, Za: _fd_seek, lb: _fd_sync, r: _fd_write, qa: initMessageSyncSleep, Ha: initTimeoutSyncSleep, Ia: isNode, Ba: isWorker, Wd: neil_resolution_changed, Ld: neil_update_frame, W: _strftime, ab: _strftime_l, fa: syncSleep, i: _system
